@@ -8,7 +8,7 @@ export { MenuItem } from './MenuItem'
 export type { MenuItemProps } from './MenuItem'
 
 export { HeadlessMenu, ContextMenu } from './HeadlessMenu'
-export type { HeadlessMenuProps, Position } from './HeadlessMenu'
+export type { HeadlessMenuProps, Position, ContextMenuProps } from './HeadlessMenu'
 
 export { MenuSeparator } from './MenuSeparator'
 

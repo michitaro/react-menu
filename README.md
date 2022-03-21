@@ -2,9 +2,9 @@
 
 This package provides a React component for macOS like menus.
 
-![Screenshot](./docs/screenshot.png)
+![Screenshot](./media/screenshot.png)
 
-## [Working Demo](https://michitaro.github.io/react-menu)
+## [Working Demo](https://michitaro.github.io/react-menu/example/)
 
 ## Features
 * macOS like Menu & Menu Bar
@@ -20,7 +20,7 @@ This package provides a React component for macOS like menus.
 npm install --save @michitaro/react-menu
 ```
 
-## [API Reference]()
+## [API Reference](https://michitaro.github.io/react-menu/docs/)
 
 ## Example
 

@@ -8,7 +8,7 @@
     "typecheck": "tsc --noEmit --emitDeclarationOnly false",
     "preview": "vite preview",
     "lint": "eslint src --ext ts,tsx",
-    "typedoc": "typedoc --out ./github-pages/docs ./src/react-menu/index.ts",
+    "typedoc": "typedoc --out ./github-pages/docs --media ./media ./src/react-menu/index.ts",
     "gh-pages": "npm run build-example && npm run typedoc && gh-pages -d ./github-pages",
     "test": "vitest"
   },
