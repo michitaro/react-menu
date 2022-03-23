@@ -61,9 +61,7 @@ export function useKeyboardNavigation({
           break
         case 'ArrowDown':
           setOpened(true)
-          requestAnimationFrame(() => {
-            rootMenu.current?.activateNextItem()
-          })
+          rootMenu.current?.activateNextItem()
           break
         case 'ArrowRight':
           focusOnNextMenu?.()

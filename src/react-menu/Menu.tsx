@@ -6,6 +6,7 @@ import { Rect } from './Rect'
 import { safePosition } from './safePosition'
 import { classNamesFromStyles } from './style'
 import { ThemeContext } from './theme'
+import { useTimer } from './useTimer'
 import { useWatch } from './useWatch'
 
 export type Direction = number // 1 = right, -1 = left
@@ -57,6 +58,7 @@ const _Menu = forwardRef<MenuHandle, MenuProps>(function Menu(
   const parentContext = useContext(MenuContext)
   const [childDirection, setChildDirection] = useState(parentContext.direction)
   const choiceList = useRef<ChoiceListHandle<MenuItemHandle>>(null)
+  const timer = useTimer()
 
   useImperativeHandle(ref, () => {
     const activeIndex = () => choiceList.current!.activeIndex()
@@ -83,8 +85,8 @@ const _Menu = forwardRef<MenuHandle, MenuProps>(function Menu(
 
     return {
       childList: () => list(),
-      activateNextItem: () => moveActive(+1),
-      activatePrevItem: () => moveActive(-1),
+      activateNextItem: () => timer(() => moveActive(+1)),
+      activatePrevItem: () => timer(() => moveActive(-1)),
       activeItem: () => {
         const ai = activeIndex()
         return ai === undefined ? undefined : list()[ai]
@@ -113,6 +115,7 @@ const _Menu = forwardRef<MenuHandle, MenuProps>(function Menu(
   const theme = useContext(ThemeContext)
 
   useLayoutEffect(resize, [baseRect])
+  
 
   const contentsTop = useRef<HTMLDivElement>(null)
 

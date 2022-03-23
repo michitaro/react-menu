@@ -7,6 +7,7 @@ import { MenuRootCloseContext } from './MenuRoot'
 import { Rect } from './Rect'
 import { classNamesFromStyles } from './style'
 import { fadeSettings, ThemeContext } from './theme'
+import { useTimer } from './useTimer'
 import { useWatch } from './useWatch'
 
 
@@ -82,17 +83,15 @@ export const MenuItem = memo(function MenuItem({
         if (options.activateFirstItem) {
           for (const item of menu.current?.childList() || []) {
             if (!item.disabled) {
-              // we have to wrap this in a requestAnimationFrame
-              // because the activated item will be cleared on useLayoutEffect of the menu's resize
-              requestAnimationFrame(item.activate)
+              item.activate(true)
               break
             }
           }
         }
       }
     },
-    activate: () => {
-      choice.activate()
+    activate: (delay?: boolean) => {
+      choice.activate(delay)
     },
     close: () => {
       setOpened(false)
@@ -123,14 +122,16 @@ export const MenuItem = memo(function MenuItem({
     setOpened(false)
   })
 
+  const timer = useTimer()
+
   const kb = useMemo(
     () => keybind ? new KeyBind(KeyTrigger.parse(keybind), () => {
-      if (!disabled) {
+      if (!disabled && onClick) {
         if (noDelay) {
-          onClick?.()
+          onClick()
         }
         else {
-          setTimeout(() => onClick?.())
+          timer(() => onClick())
         }
       }
     }) : undefined,
@@ -148,9 +149,7 @@ export const MenuItem = memo(function MenuItem({
           onClick()
         }
         else {
-          setTimeout(() => {
-            onClick()
-          }, fadeSettings.delay)
+          timer(() => onClick(), fadeSettings.delay)
         }
       }
       menuRootClose()
@@ -213,7 +212,7 @@ export type MenuItemHandle = {
   disabled: boolean
   open: (options?: { activateFirstItem?: boolean }) => void
   close: () => void
-  activate: () => void
+  activate: (delay?: boolean) => void
   childList: () => MenuItemHandle[] | undefined
   hasChild: boolean
   fire: () => void

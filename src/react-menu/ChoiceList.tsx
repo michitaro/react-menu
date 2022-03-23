@@ -1,4 +1,5 @@
 import React, { ContextType, createContext, forwardRef, ReactNode, RefObject, useCallback, useContext, useEffect, useImperativeHandle, useMemo, useRef, useState } from "react"
+import { useTimer } from "./useTimer"
 
 
 type ID = number
@@ -102,10 +103,17 @@ export function useChoice(handle?: RefObject<unknown>) {
     }
   }, [handle])
 
+  const timer = useTimer()
+
   const active = id === list.activeId
 
-  const activate = useCallback(() => {
-    list.setActiveID(id)
+  const activate = useCallback((delay = false) => {
+    if (delay) {
+      timer(() => list.setActiveID(id))
+    }
+    else {
+      list.setActiveID(id)
+    }
   }, [])
 
   const deactivate = useCallback(() => {
