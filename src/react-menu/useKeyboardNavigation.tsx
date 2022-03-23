@@ -28,11 +28,9 @@ export function useKeyboardNavigation({
           top.activatePrevItem()
           break
         case 'ArrowRight':
-          if (top === rootMenu.current!) {
-            if (!ai?.childList?.()) {
-              focusOnNextMenu?.()
-              break
-            }
+          if (!ai?.childList?.()) {
+            focusOnNextMenu?.()
+            break
           }
           ai?.open({ activateFirstItem: true })
           break
