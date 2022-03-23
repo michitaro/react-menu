@@ -36,10 +36,22 @@ const Layout = function Layout() {
     <div>
       <Outlet />
       <div className={styles.footer}>
-        <ExampleLink to="/basic">Basic</ExampleLink>
-        <ExampleLink to="/nested">Deeply Nested Menu</ExampleLink>
-        <ExampleLink to="/context">Context Menu</ExampleLink>
-        <ExampleLink to="/theme">Theme</ExampleLink>
+        <ExampleLink
+          to="/basic"
+          url='https://github.com/michitaro/react-menu/blob/main/src/example/BasicExample.tsx'
+        >Basic</ExampleLink>
+        <ExampleLink
+          to="/nested"
+          url="https://github.com/michitaro/react-menu/blob/main/src/example/NestedMenuExample.tsx"
+        >Deeply Nested Menu</ExampleLink>
+        <ExampleLink
+          to="/context"
+          url="https://github.com/michitaro/react-menu/blob/main/src/example/ContextMenuExample.tsx"
+        >Context Menu</ExampleLink>
+        <ExampleLink
+          to="/theme"
+          url="https://github.com/michitaro/react-menu/blob/main/src/example/ThemeExample.tsx"
+        >Theme</ExampleLink>
       </div>
     </div>
   )
@@ -58,9 +70,12 @@ const ExampleLink = ({ to, url, children }: ExampleLinkProps) => {
   const match = useMatch({ path: resolved.pathname, end: true })
 
   return (
-    <>
-      <button className={classNames(styles.link, { [styles.active]: match })} onClick={() => navigate(to)}>{children}</button>
-    </>
+    <div className={styles.linkGroup}>
+      <button className={classNames({ [styles.active]: match })} onClick={() => navigate(to)}>{children}</button>
+      {url &&
+        <button onClick={() => window.open(url)}>{'<code />'}</button>
+      }
+    </div>
   )
 }
 
@@ -76,8 +91,8 @@ const styles = classNamesFromStyles({
     width: '100vw',
     boxShadow: '0 0 8px black',
   },
-  link: {
-    margin: '0 1em',
+  linkGroup: {
+    margin: '0 0.5em',
   },
   active: {
     color: '#077',
