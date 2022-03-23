@@ -103,14 +103,16 @@ export function makeThemeStylesFromThemeColors({
     },
     menuBarItem: {
       padding: '8px 8px 6px 8px',
+      // borderRadius: '4px',
       ':hover': {
         background: activeBackground,
         color: activeColor,
       },
       outlineStyle: 'none',
       ':focus': {
-        background: activeBackground,
-        color: activeColor,
+        // background: activeBackground,
+        // color: activeColor,
+        boxShadow: '0 0 4px rgba(0, 0, 0, 0.25) inset',
       },
     },
     menuBarItemActive: {

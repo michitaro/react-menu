@@ -61,7 +61,8 @@ export const MenuBar = memo(function MenuBar({ children, style = {} }: MenuBarPr
 
   const onDeactivate = useCallback(() => {
     setActive(false)
-    // choiceList.current?.clear()
+    // @ts-ignore
+    // document.activeElement?.blur && document.activeElement.blur()
   }, [])
 
   const cancel = useCallback(() => {

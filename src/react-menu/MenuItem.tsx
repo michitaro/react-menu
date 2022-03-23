@@ -177,7 +177,7 @@ export const MenuItem = memo(function MenuItem({
         onPointerUp={() => {
           if (!disabled) {
             // @ts-ignore
-            document.activeElement?.blur && document.activeElement.blur()
+            // document.activeElement?.blur && document.activeElement.blur()
             fire()
           }
         }}
