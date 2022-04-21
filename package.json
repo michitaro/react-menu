@@ -25,8 +25,8 @@
   },
   "type": "module",
   "peerDependencies": {
-    "react": "17.0.2",
-    "react-dom": "^17.0.2"
+    "react": ">=17",
+    "react-dom": ">=17"
   },
   "dependencies": {
     "aphrodite": "^2.4.0",
